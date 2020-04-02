@@ -1,9 +1,4 @@
-const faunadb = require('faunadb')
-
-// your secret hash
-const secret = process.env.FAUNADB_SECRET_KEY
-const q = faunadb.query
-const client = new faunadb.Client({ secret })
+import { client, q } from '../config/db'
 
 module.exports = async (req, res) => {
   try {

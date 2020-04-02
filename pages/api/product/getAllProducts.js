@@ -1,18 +1,25 @@
 import { client, q } from '../../config/db'
 
-const getAllProducts = client.query(
-  q.Paginate(
-    q.Match(
-      q.Ref('all_products')))
-)
-  .then(response => {
-    const prodRefs = response.data
-    const getAllProductDataQuery = prodRefs.map((ref) => {
-      return q.Get(ref)
-    })
-    // query the refs
-    return client.query(getAllProductDataQuery).then((data) => data)
-  })
-  .catch(error => console.warn('error', error.message))
-
+const getAllProducts = async (req, res) => {
+  try {
+    const dbs = await client.query(
+      q.Map(
+        // iterate each item in result
+        q.Paginate(
+          // make paginatable
+          q.Match(
+            // query index
+            q.Index('all_products') // specify source
+          )
+        ),
+        ref => q.Get(ref) // lookup each result by its reference
+      )
+    )
+    // ok
+    res.status(200).json(dbs.data)
+  } catch (e) {
+    // something went wrong
+    res.status(500).json({ error: e.message })
+  }
+}
 export default getAllProducts;
