@@ -14,9 +14,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-micro": "^2.11.0",
     "bootstrap": "^4.4.1",
     "date-fns": "^2.9.0",
     "es6-promise": "^4.2.8",
+    "faunadb": "^2.13.1",
     "isomorphic-fetch": "^2.2.1",
     "isomorphic-unfetch": "^3.0.0",
     "lru-cache": "^5.1.1",
@@ -25,6 +27,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "reactstrap": "^8.4.1",
+    "sass": "1.26.3",
     "swr": "^0.1.16"
   }
 }
