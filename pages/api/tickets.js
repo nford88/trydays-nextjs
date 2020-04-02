@@ -4,6 +4,7 @@ const isBefore = require('date-fns/isBefore')
 import { groupBy, chain } from 'lodash'
 import { dateRangesForTicketMasterApi } from '../../components/utils'
 // import data from './events.json'
+console.log(dateRangesForTicketMasterApi())
 
 let dataS = []
 
@@ -16,12 +17,13 @@ const fetchApi = () => {
     geoPoint: 'gc7x7q',
     radius: '15',
     unit: 'km',
-    localStartDateTime: dateRangesForTicketMasterApi()
+    localStartDateTime: '2020-03-29T00:00:00,2020-04-13T00:00:00'
   }
   let queryString = querystring.stringify(params)
+  console.log(queryString)
   if (dataS.length === 0) {
-    dataS = fetch(API_URL + queryString).then(r => r.json())
-    // console.log(dataS)
+    dataS = fetch(API_URL + queryString).then(r => r.json()).catch(e => console.log(e))
+    console.log(dataS)
     return dataS
   } else {
     return dataS
@@ -47,8 +49,12 @@ const formatEventResults = data => {
 
 const handler = async (req, res) => {
   const data = await fetchApi()
-  const modifiedData = await formatEventResults(data)
-  // const modifiedData = data
-  return res.status(200).json(modifiedData)
+  if (data.errors) {
+    return res.status(404).json(modifdata.errorsiedData)
+  }
+  else {
+    const modifiedData = await formatEventResults(data)
+    return res.status(200).json(modifiedData)
+  }  // const modifiedData = data
 }
 export default handler

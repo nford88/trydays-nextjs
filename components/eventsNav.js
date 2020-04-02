@@ -22,24 +22,16 @@ const EventsNav = props => {
   return (
     <div>
       <Navbar color="custom" light expand="md">
-        <NavbarBrand href="/">D.E.A.G</NavbarBrand>
+        <NavbarBrand href="/">Home</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/about/">About</NavLink>
+              <NavLink href="/about">About</NavLink>
             </NavItem>
-            {/* <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown> */}
+            <NavItem>
+              <NavLink href="/events">Events</NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
